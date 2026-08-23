@@ -32,3 +32,4 @@ build/
 # Project-specific
 # Don't ignore the assets/ folder - it contains echarts
 # (we WANT it committed since it's local instead of CDN)
+energy-briefs/
