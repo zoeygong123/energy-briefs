@@ -9,19 +9,19 @@
 - **1 个总览页**：6 个市场卡片 + 横向对照表
 - **6 个分册**：老挝 / 缅甸 / 阿联酋 / 菲律宾 / 南非 / 泰国，每册包含价格、发电结构、市场体制、风险等
 
-没有构建步骤、没有依赖管理，直接打开 `能源与电力市场_Market_Brief_总览.html` 就能看。
+没有构建步骤、没有依赖管理，直接打开 `index.html` 就能看。
 
 ## 项目结构
 
 ```
 energy-briefs/
-├── 能源与电力市场_Market_Brief_总览.html       ← 首页，点这里进
-├── 老挝能源电力市场简报.html
-├── 缅甸能源电力市场简报.html
-├── 阿联酋能源电力市场简报.html
-├── 菲律宾能源电力市场简报.html
-├── 泰国能源电力市场简报.html
-├── 南非能源电力市场简报_修订版.html
+├── index.html       ← 首页，点这里进
+├── laos.html        ← 老挝
+├── myanmar.html     ← 缅甸
+├── uae.html         ← 阿联酋
+├── philippines.html ← 菲律宾
+├── south-africa.html← 南非
+├── thailand.html    ← 泰国
 ├── assets/
 │   └── js/
 │       └── echarts.min.js                     ← 发电结构图依赖，本地化无 CDN
@@ -29,16 +29,18 @@ energy-briefs/
 └── .gitignore
 ```
 
+> 文件名都用英文是因为 Cloudflare Pages 的边缘节点对中文文件名支持不好（404）。打开后所有显示、链接都是中文的。
+
 ## 改文字 / 改数据 · 速查
 
 **所有可改的内容都集中在 HTML 文件底部 `<script>` 块里的数据常量。**
 
 ### 改总览页的卡片 / 表格
-打开 `能源与电力市场_Market_Brief_总览.html`，搜：
+打开 `index.html`，搜：
 
 ```js
 const M = [
- { name:"老挝", en:"Lao PDR", file:"老挝能源电力市场简报.html",
+ { name:"老挝", en:"Lao PDR", file:"laos.html",
    lc:72.94, elec:0.044, fuel:1.730, access:96.5, pop:"777万", lead:"水电 72.8%" },
  ...
 ];
@@ -146,8 +148,9 @@ const D = { "cur": "AED", "usdLocal": 3.675, ... };
 
 | 症状 | 原因 | 解决 |
 |---|---|---|
-| 总览页打不开 | 首页文件名不对 | 确认 `能源与电力市场_Market_Brief_总览.html` 存在 |
-| 点卡片 404 | 文件名大小写不对 | 全部用 UTF-8 完整中文名，别简化 |
+| 总览页打不开 | `index.html` 缺失或大小写不对 | 确认根目录有 `index.html` |
+| 点卡片 404 | 文件名大小写不对 | 全部用小写英文名 `laos.html` / `myanmar.html` 等 |
+| 中文文件名 404 | Cloudflare Pages 不支持非 ASCII | 用英文文件名（已处理） |
 | 图表不显示 | ECharts 没加载 | 检查浏览器控制台，确认 `assets/js/echarts.min.js` 200 OK |
 | 中文乱码 | 编码不是 UTF-8 | VSCode 右下角切到 UTF-8 |
 | 大陆访问慢 | Cloudflare 免费版无大陆节点 | 可考虑加阿里云 OSS 镜像（进阶） |
