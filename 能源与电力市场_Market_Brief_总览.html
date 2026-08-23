@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>能源与电力市场 Market Brief · 总览</title>
+<style>
+:root{
+  --ink:#1c1917; --ink-2:#44403c; --ink-3:#78716c;
+  --line:#e7e5e4; --line-2:#d6d3d1;
+  --page:#f5f4f2; --surface:#ffffff;
+  --primary:#9b2226; --primary-soft:#fdf2f2; --primary-line:#e8c4c4;
+  --green:#14532d; --green-soft:#e8f0ea;
+  --amber:#854d0e;
+  --sans:"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:24px 20px 44px;background:var(--page);color:var(--ink);
+  font-family:var(--sans);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+
+header{border-bottom:2px solid var(--primary);padding-bottom:12px;
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:flex-end}
+h1{margin:0;font-size:24px;font-weight:700;color:var(--primary);letter-spacing:-.01em;line-height:1.25}
+h1 small{display:block;font-size:11px;font-weight:400;color:var(--ink-3);letter-spacing:.06em;
+  text-transform:uppercase;margin-top:5px}
+.meta{text-align:right;font-size:11px;color:var(--ink-3);line-height:1.7}
+
+.lede{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 18px;
+  font-size:13px;color:var(--ink-2);line-height:1.65}
+.lede strong{color:var(--ink)}
+
+h2.sec{margin:6px 0 0;font-size:11px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3)}
+
+/* ---- cards ---- */
+.grid{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
+
+a.card{display:flex;flex-direction:column;gap:0;text-decoration:none;color:inherit;
+  background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--primary);
+  border-radius:6px;padding:15px 17px 13px;box-shadow:0 1px 2px rgba(28,25,23,.04);
+  transition:box-shadow .16s ease, transform .16s ease, border-color .16s ease}
+a.card:hover,a.card:focus-visible{box-shadow:0 6px 16px rgba(28,25,23,.10);
+  transform:translateY(-2px);border-color:var(--primary-line);border-left-color:var(--primary)}
+a.card:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+
+.c-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.c-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
+.c-en{font-size:10px;color:var(--ink-3);letter-spacing:.04em;text-transform:uppercase;
+  white-space:nowrap;padding-top:3px}
+
+/* low-carbon bar: the one visual that ranks the six at a glance */
+.lc{margin:12px 0 11px}
+.lc-head{display:flex;justify-content:space-between;align-items:baseline;
+  font-size:10px;color:var(--ink-3);margin-bottom:4px}
+.lc-val{font-size:15px;font-weight:700;color:var(--green);font-variant-numeric:tabular-nums}
+.lc-track{height:5px;background:#eceae7;border-radius:3px;overflow:hidden}
+.lc-fill{height:100%;background:var(--green);border-radius:3px}
+
+.c-stats{display:grid;grid-template-columns:1fr 1fr;gap:7px 12px;
+  border-top:1px solid var(--line);padding-top:10px}
+.st-l{font-size:10px;color:var(--ink-3);display:block}
+.st-v{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.st-v i{font-style:normal;font-size:10px;font-weight:400;color:var(--ink-3);margin-left:2px}
+.st-v.na{color:var(--amber);font-weight:400;font-size:11px}
+
+.c-go{margin-top:11px;font-size:11px;font-weight:600;color:var(--primary);
+  display:flex;align-items:center;gap:5px}
+a.card:hover .c-go span{transform:translateX(3px)}
+.c-go span{transition:transform .16s ease}
+
+/* ---- table ---- */
+.tablecard{background:var(--surface);border:1px solid var(--line);border-radius:6px;
+  padding:16px 18px;box-shadow:0 1px 2px rgba(28,25,23,.04)}
+.tablecard h3{margin:0 0 12px;font-size:14px;font-weight:700;
+  border-left:3px solid var(--primary);padding-left:9px;line-height:1.35}
+.tablecard h3 span{font-size:10px;font-weight:400;color:var(--ink-3);display:block;letter-spacing:.03em}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:660px}
+thead th{text-align:right;font-size:11px;font-weight:600;color:var(--ink-2);background:#fafaf9;
+  border-bottom:1px solid var(--line-2);padding:8px 10px;white-space:nowrap}
+thead th:first-child{text-align:left}
+tbody td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:right;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody td:first-child{text-align:left;font-weight:600}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#fafaf9}
+td a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line-2)}
+td a:hover{color:var(--primary);border-bottom-color:var(--primary)}
+td.na{color:var(--amber);font-size:11px}
+.hint{font-size:11px;color:var(--ink-3);margin:9px 0 0;padding-top:9px;border-top:1px dashed var(--line-2)}
+
+.note{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--amber);
+  border-radius:6px;padding:13px 17px;font-size:12px;color:var(--ink-2);line-height:1.65}
+.note b{color:var(--amber)}
+
+footer{font-size:11px;color:var(--ink-3);line-height:1.75}
+footer a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line-2)}
+footer a:hover{color:var(--primary);border-bottom-color:var(--primary)}
+
+@media print{body{background:#fff;padding:0}a.card,.tablecard{box-shadow:none;break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>能源与电力市场 Market Brief
+      <small>Energy &amp; Power Market Dashboards · 6 Markets</small></h1>
+    <div class="meta">
+      高增长战略客户部内部参考<br>
+      <span style="font-size:10px">各指标时点与来源见分册内标签</span>
+    </div>
+  </header>
+
+  <div class="lede">
+    六个市场的能源与电力简报。<strong>点击任一卡片进入分册</strong>，每册包含燃油与电价、发电结构、
+    市场体制与监管、宏观与电网风险，以及可直接打开的原始来源清单。
+    燃油与电价统一取自 GlobalPetrolPrices 各国页（原始来源为各国能源部、监管机构与电力公司），
+    发电结构取 EIA 口径，电力接入率取世界银行 SDG 7.1.1。
+    各分册的美元金额均由单一汇率常量换算，口径可比。
+  </div>
+
+  <h2 class="sec">分册入口 / Briefs</h2>
+  <div class="grid" id="cards"></div>
+
+  <div class="tablecard">
+    <h3>六国横向对照 <span>Cross-Market Comparison</span></h3>
+    <div class="scroll">
+      <table>
+        <thead><tr>
+          <th>市场</th>
+          <th>低碳电力</th>
+          <th>居民电价<br><span style="font-weight:400;color:#78716c">USD/kWh</span></th>
+          <th>汽油<br><span style="font-weight:400;color:#78716c">USD/L</span></th>
+          <th>电力接入率</th>
+          <th>总人口</th>
+          <th>主导低碳电源</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <p class="hint" id="hint"></p>
+  </div>
+
+  <div class="note">
+    <b>使用前请注意三点。</b>
+    一、<strong>老挝油价存在来源冲突</strong>——GPP 报柴油约为老挝国家燃料公司官方零售价的两倍，
+    分册中保留 GPP 数值以维持同源可比，但成本测算须换用官方价。
+    二、<strong>缅甸数据质量明显低于其余五国</strong>，发电结构口径停留在 2022 年，
+    且官方与市场汇率双轨并存，不建议与其他市场直接同口径比较。
+    三、标为<strong>待核实</strong>的指标未找到可溯源的公开数字，分册中已保留对应官方查证链接，未作估算填充。
+  </div>
+
+  <footer>
+    <strong style="color:var(--ink-2)">文件放置：</strong>
+    本页通过相对路径链接分册，请将全部 7 个 HTML 文件保存在<strong>同一文件夹</strong>内，
+    链接方可正常跳转。<br>
+    主要数据来源：
+    <a href="https://www.globalpetrolprices.com/">GlobalPetrolPrices</a> ·
+    <a href="https://data.worldbank.org/indicator/EG.ELC.ACCS.ZS">World Bank SDG 7.1.1</a> ·
+    <a href="https://www.adb.org/outlook/editions/july-2026">ADB Asian Development Outlook</a> ·
+    <a href="https://lowcarbonpower.org/">LowCarbonPower</a>
+  </footer>
+
+</div>
+
+<script>
+/* ============================================================
+   单一数据源：卡片、排序、对照表全部由此生成。
+   低碳占比与电价均为各分册内已核对的同源数值。
+   ============================================================ */
+const M = [
+  { name:"老挝",   en:"Lao PDR",     file:"老挝能源电力市场简报.html",
+    lc:72.94, elec:0.044, fuel:1.730, access:96.5,  pop:"777万",   lead:"水电 72.8%" },
+  { name:"缅甸",   en:"Myanmar",     file:"缅甸能源电力市场简报.html",
+    lc:48.71, elec:0.023, fuel:1.520, access:76.8,  pop:null,      lead:"水电 48.2%" },
+  { name:"阿联酋", en:"UAE",         file:"阿联酋能源电力市场简报.html",
+    lc:28.47, elec:0.080, fuel:0.702, access:null,  pop:"1135万",  lead:"核电 23.1%" },
+  { name:"菲律宾", en:"Philippines", file:"菲律宾能源电力市场简报.html",
+    lc:19.61, elec:0.200, fuel:1.200, access:98.0,  pop:"1.13亿",  lead:"地热 8.5%" },
+  { name:"南非",   en:"South Africa",file:"南非能源电力市场简报_修订版.html",
+    lc:18.20, elec:0.233, fuel:1.606, access:87.7,  pop:"6310万",  lead:"太阳能 8.0%" },
+  { name:"泰国",   en:"Thailand",    file:"泰国能源电力市场简报.html",
+    lc:8.72,  elec:0.136, fuel:1.323, access:100.0, pop:null,      lead:"水电 3.4%" }
+];
+
+const MAX = Math.max(...M.map(m => m.lc));
+const na  = '<span class="st-v na">待核实</span>';
+
+document.getElementById("cards").innerHTML = M.map(m => `
+  <a class="card" href="${encodeURI(m.file)}">
+    <div class="c-top">
+      <span class="c-name">${m.name}</span>
+      <span class="c-en">${m.en}</span>
+    </div>
+    <div class="lc">
+      <div class="lc-head"><span>低碳电力占比 Low-Carbon</span>
+        <span class="lc-val">${m.lc.toFixed(1)}%</span></div>
+      <div class="lc-track"><div class="lc-fill" style="width:${(m.lc / MAX * 100).toFixed(1)}%"></div></div>
+    </div>
+    <div class="c-stats">
+      <div><span class="st-l">居民电价</span>
+        <span class="st-v">${m.elec.toFixed(3)}<i>USD/kWh</i></span></div>
+      <div><span class="st-l">汽油</span>
+        <span class="st-v">${m.fuel.toFixed(3)}<i>USD/L</i></span></div>
+      <div><span class="st-l">电力接入率</span>
+        ${m.access === null ? na : `<span class="st-v">${m.access.toFixed(1)}<i>%</i></span>`}</div>
+      <div><span class="st-l">总人口</span>
+        ${m.pop === null ? na : `<span class="st-v">${m.pop}</span>`}</div>
+    </div>
+    <div class="c-go">打开简报 <span>&rarr;</span></div>
+  </a>`).join("");
+
+document.getElementById("tbody").innerHTML = M.map(m => `
+  <tr>
+    <td><a href="${encodeURI(m.file)}">${m.name}</a></td>
+    <td>${m.lc.toFixed(1)}%</td>
+    <td>${m.elec.toFixed(3)}</td>
+    <td>${m.fuel.toFixed(3)}</td>
+    ${m.access === null ? '<td class="na">待核实</td>' : `<td>${m.access.toFixed(1)}%</td>`}
+    ${m.pop === null ? '<td class="na">待核实</td>' : `<td>${m.pop}</td>`}
+    <td style="text-align:left;color:var(--ink-2)">${m.lead}</td>
+  </tr>`).join("");
+
+const hi = M[0], lo = M[M.length - 1];
+const dear = M.reduce((a, b) => a.elec > b.elec ? a : b);
+const cheap = M.reduce((a, b) => a.elec < b.elec ? a : b);
+document.getElementById("hint").innerHTML =
+  `按低碳电力占比排序。${hi.name}（${hi.lc.toFixed(1)}%）与${lo.name}（${lo.lc.toFixed(1)}%）相差 ` +
+  `<strong>${(hi.lc / lo.lc).toFixed(1)} 倍</strong>；居民电价从${cheap.name}的 ` +
+  `${cheap.elec.toFixed(3)} 到${dear.name}的 ${dear.elec.toFixed(3)} USD/kWh，` +
+  `相差 <strong>${(dear.elec / cheap.elec).toFixed(0)} 倍</strong>。` +
+  `电价与汽油为各分册同源数据按该册汇率折算，时点见分册内标签。`;
+</script>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>老挝 能源与电力市场 Market Brief</title>
+<script src="assets/js/echarts.min.js"></script>
+<style>
+:root{
+  --ink:#1c1917; --ink-2:#44403c; --ink-3:#78716c;
+  --line:#e7e5e4; --line-2:#d6d3d1;
+  --page:#f5f4f2; --surface:#ffffff;
+  --primary:#9b2226; --primary-soft:#fdf2f2; --primary-line:#e8c4c4;
+  --amber:#854d0e; --amber-soft:#fefce8; --amber-line:#eadfb0;
+  --blue:#1e3a8a;  --blue-soft:#f1f5fd;  --blue-line:#cdd9f0;
+  --green:#14532d;
+  --sans:"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"SF Mono","Cascadia Mono",Consolas,"Roboto Mono",monospace;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; padding:24px 20px 40px; background:var(--page); color:var(--ink);
+  font-family:var(--sans); font-size:14px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+
+/* numerals line up in every data context */
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+
+/* ---- vintage chip: the page's organising device ---- */
+.vintage{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10px;line-height:1.4;color:var(--ink-3);
+  border:1px solid var(--line-2);border-radius:3px;
+  padding:1px 6px;background:#fafaf9;white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+}
+.vintage b{font-weight:600;color:var(--ink-2)}
+.vintage.warn{border-color:var(--amber-line);background:var(--amber-soft);color:var(--amber)}
+.vintage.warn b{color:var(--amber)}
+
+/* ---- header ---- */
+header{border-bottom:2px solid var(--primary);padding-bottom:12px;
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:flex-end}
+h1{margin:0;font-size:23px;font-weight:700;color:var(--primary);letter-spacing:-.01em;line-height:1.25}
+h1 small{display:block;font-size:11px;font-weight:400;color:var(--ink-3);letter-spacing:.06em;
+  text-transform:uppercase;margin-top:4px}
+.meta{text-align:right;font-size:11px;color:var(--ink-3);line-height:1.7}
+.meta strong{color:var(--ink-2);font-weight:600}
+
+/* ---- fx bar ---- */
+.fx{background:var(--primary-soft);border:1px solid var(--primary-line);border-radius:5px;
+  padding:9px 12px;display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center}
+.fx-label{font-size:12px;font-weight:700;color:var(--primary);display:flex;align-items:center;gap:6px}
+.fx-rates{display:flex;flex-wrap:wrap;gap:6px 20px;align-items:center;font-size:12px;color:var(--ink-2)}
+.fx-rates div{white-space:nowrap}
+.fx-rates b{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.fx-note{font-size:10px;color:var(--ink-3)}
+
+/* ---- grid ---- */
+.grid{display:grid;gap:16px}
+.kpis{grid-template-columns:repeat(2,1fr)}
+.two{grid-template-columns:1fr}
+@media(min-width:900px){
+  .kpis{grid-template-columns:repeat(4,1fr)}
+  .two{grid-template-columns:1fr 1fr}
+}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;
+  padding:16px 18px;height:100%;display:flex;flex-direction:column;
+  box-shadow:0 1px 2px rgba(28,25,23,.04)}
+.card h2{margin:0 0 12px;font-size:14px;font-weight:700;color:var(--ink);
+  border-left:3px solid var(--primary);padding-left:9px;line-height:1.35}
+.card h2 span{font-size:10px;font-weight:400;color:var(--ink-3);display:block;letter-spacing:.03em}
+
+/* ---- kpi ---- */
+.kpi{text-align:left;gap:0}
+.kpi .k-label{font-size:11px;font-weight:600;color:var(--ink-2)}
+.kpi .k-en{font-size:10px;color:var(--ink-3);display:block;font-weight:400}
+.kpi .k-value{font-size:25px;font-weight:700;letter-spacing:-.02em;margin:8px 0 8px;
+  font-variant-numeric:tabular-nums;line-height:1.1}
+.kpi .k-value u{text-decoration:none;font-size:14px;font-weight:600;color:var(--ink-3);margin-left:2px}
+.kpi .k-foot{margin-top:auto}
+
+/* ---- tables ---- */
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+thead th{text-align:left;font-size:11px;font-weight:600;color:var(--ink-2);
+  background:#fafaf9;border-bottom:1px solid var(--line-2);padding:7px 9px;white-space:nowrap}
+thead th.r{text-align:right}
+tbody td{padding:8px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+td.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.grp td{background:#fafaf9;font-size:10px;font-weight:700;color:var(--ink-3);
+  letter-spacing:.08em;text-transform:uppercase;padding:5px 9px}
+.grp span{text-transform:none;letter-spacing:0;font-weight:400;margin-left:4px}
+.en{font-size:10px;color:var(--ink-3);margin-left:5px}
+.pending{color:var(--amber);font-size:11px;font-style:normal}
+
+/* ---- definition rows ---- */
+dl{margin:0}
+.row{display:grid;grid-template-columns:112px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:none;padding-bottom:0}
+.row:first-child{padding-top:0}
+dt{font-size:12px;font-weight:600;color:var(--ink)}
+dt span{display:block;font-size:10px;font-weight:400;color:var(--ink-3)}
+dd{margin:0;font-size:12.5px;color:var(--ink-2);line-height:1.55}
+dd .lead{font-weight:600;color:var(--primary);display:block;margin-bottom:3px}
+dd ul{margin:4px 0 0;padding-left:16px}
+dd li{margin-bottom:2px}
+dd .org{font-weight:600;color:var(--ink)}
+.figure{font-weight:700;color:var(--primary);font-variant-numeric:tabular-nums}
+
+/* ---- risk ---- */
+.risk{border-top:3px solid var(--primary)}
+.risk .row{grid-template-columns:104px 1fr;gap:0;padding:0;border:none;margin-bottom:6px}
+.risk .row:last-child{margin-bottom:0}
+.risk dt{padding:11px 10px;font-size:12px}
+.risk dd{padding:11px 12px;font-size:12.5px}
+.r-red dt{background:var(--primary-soft);color:var(--primary)}
+.r-red dt span{color:var(--primary);opacity:.7}
+.r-red dd{background:#fefafa;color:#7f1d1d}
+.r-amb dt{background:var(--amber-soft);color:var(--amber)}
+.r-amb dt span{color:var(--amber);opacity:.7}
+.r-amb dd{background:#fefdf7;color:#713f12}
+.r-blu dt{background:var(--blue-soft);color:var(--blue)}
+.r-blu dt span{color:var(--blue);opacity:.7}
+.r-blu dd{background:#f8fafd;color:#1e3a8a}
+
+/* ---- chart ---- */
+#mix{width:100%;flex:1;min-height:280px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.chart-note{font-size:11px;color:var(--ink-3);margin:8px 0 0;padding-top:8px;border-top:1px dashed var(--line-2)}
+
+/* ---- sources ---- */
+.sources{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 18px}
+.sources h3{margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-3)}
+.sources ol{margin:0;padding-left:18px;font-size:11px;color:var(--ink-3);line-height:1.75}
+.sources a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line-2);word-break:break-all}
+.sources a:hover,.sources a:focus-visible{color:var(--primary);border-bottom-color:var(--primary)}
+:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+
+@media print{
+  body{background:#fff;padding:0;font-size:11px}
+  .card,.sources{box-shadow:none;break-inside:avoid}
+  .grid{gap:10px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>老挝 能源与电力市场 Market Brief
+      <small>Lao PDR · Energy & Power Market Dashboard</small></h1>
+    <div class="meta">
+      高增长战略客户部内部参考<br>
+      <span style="font-size:10px">各指标时点见对应标签，非统一口径</span>
+    </div>
+  </header>
+
+  <!-- FX -->
+  <div class="fx">
+    <div class="fx-label">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M14.6 9C14.1 8.4 13.1 8 12 8c-1.7 0-3 .9-3 2s1.3 2 3 2 3 .9 3 2-1.3 2-3 2c-1.1 0-2.1-.4-2.6-1" stroke-linecap="round"/></svg>
+      参考汇率 <span style="font-weight:400;font-size:10px;color:var(--ink-3)">/ FX Reference</span>
+    </div>
+    <div class="fx-rates" id="fxRates"></div>
+    <span class="fx-note">下表美元金额均由 USD 对本币的单一基准换算，不单独维护</span>
+    <span class="vintage" id="fxVintage"></span>
+  </div>
+
+  <!-- KPIs -->
+  <div class="grid kpis">
+    <div class="card kpi">
+      <div class="k-label">总人口 <span class="k-en">Population</span></div>
+      <div class="k-value num">777<u>万</u></div>
+      <div class="k-foot"><span class="vintage"><b>2024</b> · 世界银行/CIA 口径</span></div>
+    </div><div class="card kpi">
+      <div class="k-label">GDP 增速 <span class="k-en">GDP Growth</span></div>
+      <div class="k-value num">—<u></u></div>
+      <div class="k-foot"><span class="vintage warn"><b>待核实</b> · ADB 统计表</span></div>
+    </div><div class="card kpi">
+      <div class="k-label">电力接入率 <span class="k-en">Access to Electricity</span></div>
+      <div class="k-value num">96.5<u>%</u></div>
+      <div class="k-foot"><span class="vintage"><b>2023</b> · World Bank</span></div>
+    </div><div class="card kpi">
+      <div class="k-label">低碳电力占比 <span class="k-en">Low-Carbon Share</span></div>
+      <div class="k-value num">72.9<u>%</u></div>
+      <div class="k-foot"><span class="vintage"><b>2022</b> · EIA</span></div>
+    </div>
+  </div>
+
+  <!-- Prices + Mix -->
+  <div class="grid two">
+    <div class="card">
+      <h2>核心能源与电力价格 <span>Energy &amp; Electricity Prices</span></h2>
+      <table>
+        <thead><tr>
+          <th>指标 <span class="en">Item</span></th>
+          <th>时点 <span class="en">As of</span></th>
+          <th class="r" id="curHead">—</th>
+          <th class="r">USD</th>
+        </tr></thead>
+        <tbody id="priceBody"></tbody>
+      </table>
+      <p class="chart-note" id="priceNote"></p>
+    </div>
+
+    <div class="card">
+      <h2>发电结构 <span>Electricity Generation Mix</span></h2>
+      <div id="mix" role="img" aria-label="发电结构环形图"></div>
+      <noscript><p style="font-size:12px;color:var(--ink-3)">图表需启用 JavaScript，数据见下方表格。</p></noscript>
+      <table class="sr-only" id="mixTable"><caption>发电结构</caption></table>
+      <p class="chart-note" id="mixNote"></p>
+    </div>
+  </div>
+
+  <!-- Structure + Risk -->
+  <div class="grid two">
+    <div class="card">
+      <h2>市场体制与监管 <span>Market Structure &amp; Regulation</span></h2>
+      <dl>
+        <div class="row"><dt>主管与运营机构<span>Key Entities</span></dt><dd><span class="org">能源矿产部（MEM）</span>：电力规划、项目审批与跨境购售电协议。<br><span class="org">EDL</span>：老挝国家电力公司，国内输配电与售电主体。<br><span class="org">工贸部</span>：成品油零售价的定期调整发布方。</dd></div><div class="row"><dt>市场定位<span>Market Position</span></dt><dd><span class="lead">以水电出口为核心的“东南亚蓄电池”模式</span>电力是老挝主要出口商品之一，主要销往泰国与越南；国内消费规模相对装机而言很小。<ul><li><strong>2024 年清洁能源投资：</strong>约 <span class="figure">5.50 亿美元</span>，较 2023 年的 1,014 万美元大幅跃升。</li><li><strong>政策工具：</strong>Climatescope 追踪的 8 类政策中具备 4 类（可再生目标、税收优惠、绿证、优先调度），竞价招标与上网电价机制缺位。</li></ul></dd></div><div class="row"><dt>电价水平<span>Tariff Level</span></dt><dd>居民电价约为世界均值的 <span class="figure">17.3%</span>、亚洲均值的 34%，属全球最低区间之一。低电价叠加充裕水电，意味着<strong>境内工商业自发自用几乎没有经济性</strong>，市场机会集中在发电侧与跨境送出，而非用户侧。<div style="margin-top:7px"><span class="vintage"><b>2025-09</b> · GlobalPetrolPrices</span></div></dd></div>
+      </dl>
+    </div>
+
+    <div class="card risk">
+      <h2>宏观与电网风险 <span>Macro &amp; Grid Risk</span></h2>
+      <dl>
+        <div class="row r-red"><dt>来水与季节性<span>Hydrology</span></dt><dd>七成以上电力来自水电，2024 年发电量较上年下滑约 18%。枯水年同时压缩出口收入与国内供应，且与旱季用电高峰重叠，是最核心的运营风险。</dd></div><div class="row r-amb"><dt>宏观与偿付能力<span>Macro & Debt</span></dt><dd>基普对美元长期承压、通胀高企，外债与外汇储备结构是跨境电力贸易回款的关键约束。以美元或泰铢计价的 PPA 条款与汇兑安排应视为项目风险的第一层，而非商务细节。</dd></div><div class="row r-blu"><dt>数据口径冲突<span>Source Conflict</span></dt><dd>本页已发现燃油价格在 GPP 与官方来源之间存在近一倍的差异，工商业电价缺失。老挝的公开数据完备度介于泰菲与缅甸之间，关键数字建议逐项回到 EDL 与工贸部原始发布核对。</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="sources">
+    <h3>数据来源 / Sources</h3>
+    <ol>
+      <li>汽油价格 GlobalPetrolPrices 老挝页 —— <a href="https://www.globalpetrolprices.com/Laos/gasoline_prices/">www.globalpetrolprices.com/Laos/gasoline_prices/</a></li><li>柴油价格 GlobalPetrolPrices 老挝页 —— <a href="https://www.globalpetrolprices.com/Laos/diesel_prices/">www.globalpetrolprices.com/Laos/diesel_prices/</a></li><li>电价与能源结构（原始来源 EDL / 能源矿产部 / EIA） —— <a href="https://www.globalpetrolprices.com/Laos/electricity_prices/">www.globalpetrolprices.com/Laos/electricity_prices/</a></li><li>官方零售油价 老挝国家燃料公司（分省） —— <a href="https://laostatefuel.com/en/gas-price.html">laostatefuel.com/en/gas-price.html</a></li><li>工贸部 2026-06-25 调价公告 老挝国家通讯社 —— <a href="https://kpl.gov.la/En/detail.aspx?id=101787">kpl.gov.la/En/detail.aspx?id=101787</a></li><li>电力接入率 World Bank（湄公五国对照） —— <a href="https://data.worldbank.org/?locations=KH-LA-MM-TH-VN">data.worldbank.org/?locations=KH-LA-MM-TH-VN</a></li><li>水电装机、发电量与投资 BNEF Climatescope 2025 —— <a href="https://www.global-climatescope.org/markets/laos">www.global-climatescope.org/markets/laos</a></li><li>GDP 增速 ADB 亚洲发展展望统计表（待核实） —— <a href="https://data.adb.org/dataset/gdp-growth-asia-and-pacific-asian-development-outlook">data.adb.org/dataset/gdp-growth-asia-and-pacific-asian-development-outlook</a></li><li>USD/CNY、EUR/USD 汇率 —— <a href="https://tradingeconomics.com/china/currency">tradingeconomics.com/china/currency</a></li>
+    </ol>
+  </div>
+
+</div>
+
+<script>
+/* ============================================================
+   单一数据源。改数只改这里，页面所有换算与图表自动跟随。
+   USD/CNY 6.72、EUR/USD 1.1545 取自 2026-08-25 市场中间价。
+   ============================================================ */
+const D = {"cur": "LAK", "curName": "基普", "usdLocal": 22509, "cnyLocal": 3349.5535714285716, "eurLocal": 25986.6405, "fxAsOf": "2026-07-06", "fxNote": "GlobalPetrolPrices 燃油采集时汇率", "kpis": [{"label": "总人口", "en": "Population", "value": "777", "unit": "万", "chip": "2024 · 世界银行/CIA 口径"}, {"label": "GDP 增速", "en": "GDP Growth", "value": "—", "unit": "", "chip": "待核实 · ADB 统计表", "warn": true}, {"label": "电力接入率", "en": "Access to Electricity", "value": "96.5", "unit": "%", "chip": "2023 · World Bank"}, {"label": "低碳电力占比", "en": "Low-Carbon Share", "value": "72.9", "unit": "%", "chip": "2022 · EIA"}], "prices": [{"group": "燃油（每升）", "en": "Fuels, per litre"}, {"name": "汽油 Octane-95", "en": "Gasoline", "asOf": "2026-07-06", "v": 38940}, {"name": "柴油", "en": "Diesel", "asOf": "2026-07-20", "v": 47600, "stale": true}, {"group": "电价（每 kWh）", "en": "Electricity, per kWh"}, {"name": "居民用电", "en": "Households", "asOf": "2025-09", "v": 993.73, "stale": true}, {"name": "工商业用电", "en": "Business", "asOf": "2025-09", "v": null, "pending": "GPP 未公布，待核实"}], "priceNote": "<strong style=\"color:var(--amber)\">燃油价格存在重大来源冲突：老挝国家燃料公司公布的万象 2026-07-09 零售价为95 号汽油 34,720 基普、柴油 25,400 基普；工贸部 2026-06-25 调价表为柴油 24,560、普通汽油 30,690 基普。GPP 的柴油报价（47,600）接近官方价的两倍，本表为保持五国同源可比而保留 GPP 数值，但任何成本测算都应改用官方价并核实口径差异。</strong>电价来源为老挝国家电力公司（EDL）与能源矿产部；工商业电价 GPP 未公布。", "mix": [["水电", "Hydro", 72.81, "#2563eb"], ["化石能源", "Fossil", 27.05, "#3f3f46"], ["太阳能", "Solar", 0.13, "#d97706"]], "mixAsOf": "2022 · EIA / GlobalPetrolPrices", "mixNote": "水电占比 72.8%，为本组五国最高，低碳电力占比 72.9% 同样居首。2024 年水电装机 9.68 GW、发电 15.39 TWh，较 2023 年的 18.75 TWh 明显回落——<strong>来水波动是老挝电力供应的首要变量，不是次要因素。</strong>"};
+
+const fmt = (n, d) => n.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
+const dp  = v => v >= 1000 ? 0 : v >= 10 ? 2 : 3;
+
+/* ---- FX bar ---- */
+document.getElementById("fxRates").innerHTML =
+  `<div>USD/${D.cur} <b>${fmt(D.usdLocal, dp(D.usdLocal))}</b></div>` +
+  `<div>CNY/${D.cur} <b>${fmt(D.cnyLocal, dp(D.cnyLocal))}</b></div>` +
+  `<div>EUR/${D.cur} <b>${fmt(D.eurLocal, dp(D.eurLocal))}</b></div>`;
+document.getElementById("fxVintage").innerHTML = `<b>${D.fxAsOf}</b> · ${D.fxNote}`;
+document.getElementById("curHead").textContent = D.cur;
+
+/* ---- price table ---- */
+document.getElementById("priceBody").innerHTML = D.prices.map(r => {
+  if (r.group) return `<tr class="grp"><td colspan="4">${r.group}<span>${r.en}</span></td></tr>`;
+  const has = r.v !== null && r.v !== undefined;
+  const usd = has ? fmt(r.v / D.usdLocal, 3) : "—";
+  const loc = has ? fmt(r.v, dp(r.v)) : `<span class="pending">${r.pending}</span>`;
+  const chip = r.stale
+    ? `<span class="vintage warn"><b>${r.asOf}</b></span>`
+    : `<span class="vintage"><b>${r.asOf}</b></span>`;
+  return `<tr><td>${r.name}<span class="en">${r.en}</span></td><td>${chip}</td>` +
+         `<td class="r">${loc}</td><td class="r">${usd}</td></tr>`;
+}).join("");
+
+document.getElementById("priceNote").innerHTML =
+  `美元列 = ${D.cur} ÷ ${fmt(D.usdLocal, dp(D.usdLocal))}，随上方汇率联动。` + D.priceNote;
+
+/* ---- mix chart ---- */
+const MIX = D.mix.map(([name, en, value, color]) => ({ name, en, value, color }));
+const fossil = MIX.filter(d => d.en === "Fossil").reduce((s, d) => s + d.value, 0);
+const lowCarbon = MIX.reduce((s, d) => s + d.value, 0) - fossil;
+const total = MIX.reduce((s, d) => s + d.value, 0);
+
+const chartEl = document.getElementById("mix");
+const chart = echarts.init(chartEl, null, { renderer: "svg" });
+
+chart.setOption({
+  /* 用 graphic 而非 title：top:"middle" 按整块文字的几何中心对齐，
+     title 的 top 百分比锚的是文字块顶边，会整体偏下。 */
+  graphic: {
+    type: "text", left: "center", top: "middle", silent: true, z: 1,
+    style: {
+      text: `{big|${lowCarbon.toFixed(1)}%}
+{sm|低碳电力}
+{sm|Low-Carbon}`,
+      textAlign: "center",
+      rich: {
+        big: { fontSize: 30, fontWeight: 700, fill: "#14532d", lineHeight: 36 },
+        sm:  { fontSize: 10, fill: "#14532d", lineHeight: 14 }
+      }
+    }
+  },
+  tooltip: {
+    trigger: "item", confine: true, textStyle: { fontSize: 11 },
+    formatter: p => `${p.data.name} ${p.data.en}<br/><b>${p.value}%</b>`
+  },
+  series: [{
+    type: "pie",
+    radius: ["55%", "74%"],
+    center: ["50%", "50%"],
+    minAngle: 2,
+    itemStyle: { borderColor: "#fff", borderWidth: 2 },
+    label: {
+      formatter: p => `{n|${p.data.name}}  {v|${p.value}%}`,
+      rich: {
+        n: { fontSize: 11, color: "#44403c" },
+        v: { fontSize: 11, fontWeight: 700, color: "#1c1917" }
+      }
+    },
+    labelLine: { length: 10, length2: 14, smooth: false },
+    labelLayout: { hideOverlap: true },
+    data: MIX.map(d => ({ ...d, itemStyle: { color: d.color } }))
+  }]
+});
+
+/* 容器高度会随左侧表格变化，window.resize 监听不到 */
+new ResizeObserver(() => chart.resize()).observe(chartEl);
+
+/* 读屏器与无 JS 场景的等价表格 */
+document.getElementById("mixTable").innerHTML =
+  "<caption>发电结构</caption><tr><th>能源</th><th>占比</th></tr>" +
+  MIX.map(d => `<tr><td>${d.name} ${d.en}</td><td>${d.value}%</td></tr>`).join("");
+
+document.getElementById("mixNote").innerHTML =
+  `<span class="vintage"><b>${D.mixAsOf.split(" · ")[0]}</b> · ${D.mixAsOf.split(" · ",2)[1]}</span> ` +
+  `合计 ${fmt(total, 1)}%。着色项为低碳电源，灰阶为化石电源。` + D.mixNote;
+</script>
+</body>
+</html>
