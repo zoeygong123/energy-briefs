@@ -202,8 +202,8 @@ dd .org{font-weight:600;color:var(--ink)}
       <div class="k-foot"><span class="vintage"><b>2025 全年</b> · UAE NBS</span></div>
     </div><div class="card kpi">
       <div class="k-label">电力接入率 <span class="k-en">Access to Electricity</span></div>
-      <div class="k-value num">—<u></u></div>
-      <div class="k-foot"><span class="vintage warn"><b>待核实</b> · World Bank</span></div>
+      <div class="k-value num">100<u>%</u></div>
+      <div class="k-foot"><span class="vintage"><b>2026</b> · World Bank</span></div>
     </div><div class="card kpi">
       <div class="k-label">低碳电力占比 <span class="k-en">Low-Carbon Share</span></div>
       <div class="k-value num">28.5<u>%</u></div>
@@ -267,7 +267,7 @@ dd .org{font-weight:600;color:var(--ink)}
    单一数据源。改数只改这里，页面所有换算与图表自动跟随。
    USD/CNY 6.72、EUR/USD 1.1545 取自 2026-08-25 市场中间价。
    ============================================================ */
-const D = {"cur": "AED", "curName": "迪拉姆", "usdLocal": 3.675, "cnyLocal": 0.546875, "eurLocal": 4.2427875, "fxAsOf": "2025-12-08", "fxNote": "迪拉姆对美元实行固定汇率制", "kpis": [{"label": "总人口", "en": "Population", "value": "1135", "unit": "万", "chip": "2025 · UN WPP"}, {"label": "GDP 增速", "en": "GDP Growth", "value": "5.6", "unit": "%", "chip": "2025 全年 · UAE NBS"}, {"label": "电力接入率", "en": "Access to Electricity", "value": "—", "unit": "", "chip": "待核实 · World Bank", "warn": true}, {"label": "低碳电力占比", "en": "Low-Carbon Share", "value": "28.5", "unit": "%", "chip": "2024 · EIA"}], "prices": [{"group": "燃油（每升）", "en": "Fuels, per litre"}, {"name": "汽油 Octane-95", "en": "Gasoline", "asOf": "2025-12-08", "v": 2.58}, {"name": "柴油", "en": "Diesel", "asOf": "2025-12-08", "v": 2.85}, {"group": "电价（每 kWh）", "en": "Electricity, per kWh"}, {"name": "居民用电", "en": "Households", "asOf": "2025-03-01", "v": 0.293, "stale": true}, {"name": "工商业用电", "en": "Business", "asOf": "2025-03-01", "v": 0.405, "stale": true}], "priceNote": "燃油为零售泵价，含全部税费；阿联酋自 2015 年起取消燃油补贴，由能源与基础设施部按月依国际油价调整。电价来源为阿布扎比配电公司（ADDC）与迪拜水电局（DEWA），各酋长国税费结构不同，本页为全国口径。", "mix": [["化石能源", "Fossil", 71.53, "#3f3f46"], ["核电", "Nuclear", 23.07, "#7c3aed"], ["太阳能", "Solar", 5.4, "#d97706"]], "mixAsOf": "2024 · EIA / GlobalPetrolPrices", "mixNote": "核电占比 23.1% 为本组五国最高——巴拉卡核电站 4 台机组已于 2024 年 3 月全部投运，装机 5,348 MWe。风电与水电为零，光伏是唯一在增长的可再生电源。"};
+const D = {"cur": "AED", "curName": "迪拉姆", "usdLocal": 3.675, "cnyLocal": 0.546875, "eurLocal": 4.2427875, "fxAsOf": "2025-12-08", "fxNote": "迪拉姆对美元实行固定汇率制", "kpis": [{"label": "总人口", "en": "Population", "value": "1135", "unit": "万", "chip": "2025 · UN WPP"}, {"label": "GDP 增速", "en": "GDP Growth", "value": "5.6", "unit": "%", "chip": "2025 全年 · UAE NBS"}, {"label": "电力接入率", "en": "Access to Electricity", "value": "100", "unit": "%", "chip": "2026 · World Bank"}, {"label": "低碳电力占比", "en": "Low-Carbon Share", "value": "28.5", "unit": "%", "chip": "2024 · EIA"}], "prices": [{"group": "燃油（每升）", "en": "Fuels, per litre"}, {"name": "汽油", "en": "Gasoline", "asOf": "2026-08-24", "v": 3.49}, {"name": "柴油", "en": "Diesel", "asOf": "2026-08-24", "v": 3.8}, {"group": "电价（每 kWh）", "en": "Electricity, per kWh"}, {"name": "居民用电", "en": "Households", "asOf": "2025-12-01", "v": 0.293}, {"name": "工商业用电", "en": "Business", "asOf": "2025-12-01", "v": 0.405}], "priceNote": "燃油为零售泵价，含全部税费；阿联酋自 2015 年起取消燃油补贴，由能源与基础设施部按月依国际油价调整。电价来源为阿布扎比配电公司（ADDC）与迪拜水电局（DEWA），各酋长国税费结构不同，本页为全国口径。美元列 = 按照 Global Petrol Prices 时点价格。", "mix": [["化石能源", "Fossil", 71.53, "#3f3f46"], ["核电", "Nuclear", 23.07, "#7c3aed"], ["太阳能", "Solar", 5.4, "#d97706"]], "mixAsOf": "2024 · EIA / GlobalPetrolPrices", "mixNote": "核电占比 23.1% 为本组五国最高——巴拉卡核电站 4 台机组已于 2024 年 3 月全部投运，装机 5,348 MWe。风电与水电为零，光伏是唯一在增长的可再生电源。"};
 
 const fmt = (n, d) => n.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
 const dp  = v => v >= 1000 ? 0 : v >= 10 ? 2 : 3;
@@ -294,7 +294,7 @@ document.getElementById("priceBody").innerHTML = D.prices.map(r => {
 }).join("");
 
 document.getElementById("priceNote").innerHTML =
-  `美元列 = ${D.cur} ÷ ${fmt(D.usdLocal, dp(D.usdLocal))}，随上方汇率联动。` + D.priceNote;
+  `美元列 = 按照 Global Petrol Prices 时点价格。` + D.priceNote;
 
 /* ---- mix chart ---- */
 const MIX = D.mix.map(([name, en, value, color]) => ({ name, en, value, color }));

@@ -86,6 +86,7 @@ thead th:first-child{text-align:left}
 tbody td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:right;
   font-variant-numeric:tabular-nums;white-space:nowrap}
 tbody td:first-child{text-align:left;font-weight:600}
+tbody td:last-child{text-align:right;color:var(--ink);font-variant-numeric:revert;white-space:normal;font-weight:400}
 tbody tr:last-child td{border-bottom:none}
 tbody tr:hover{background:#fafaf9}
 td a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line-2)}
@@ -163,18 +164,13 @@ footer a:hover{color:var(--primary);border-bottom-color:var(--primary)}
   </div>
 
   <div class="note">
-    <b>使用前请注意三点。</b>
-    一、<strong>老挝油价存在来源冲突</strong>——GPP 报柴油约为老挝国家燃料公司官方零售价的两倍，
-    分册中保留 GPP 数值以维持同源可比，但成本测算须换用官方价。
-    二、<strong>缅甸数据质量明显低于其余五国</strong>，发电结构口径停留在 2022 年，
-    且官方与市场汇率双轨并存，不建议与其他市场直接同口径比较。
+    <b>使用前请注意：</b>
+    一、油价、电力价格按照Global Petrol Prices统一取值、方便平行对比，实际工商业电价若为两部制电价，已进行平均电价换算；
+    二、老挝未官方公布工商业电价，目前工商业电价按照当地市场认知进行估算；
     三、标为<strong>待核实</strong>的指标未找到可溯源的公开数字，分册中已保留对应官方查证链接，未作估算填充。
   </div>
 
   <footer>
-    <strong style="color:var(--ink-2)">文件放置：</strong>
-    本页通过相对路径链接分册，请将全部 7 个 HTML 文件保存在<strong>同一文件夹</strong>内，
-    链接方可正常跳转。<br>
     主要数据来源：
     <a href="https://www.globalpetrolprices.com/">GlobalPetrolPrices</a> ·
     <a href="https://data.worldbank.org/indicator/EG.ELC.ACCS.ZS">World Bank SDG 7.1.1</a> ·
@@ -193,9 +189,9 @@ const M = [
   { name:"老挝",   en:"Lao PDR",     file:"laos.html",
     lc:72.94, elec:0.044, fuel:1.730, access:96.5,  pop:"777万",   lead:"水电 72.8%" },
   { name:"缅甸",   en:"Myanmar",     file:"myanmar.html",
-    lc:48.71, elec:0.023, fuel:1.520, access:76.8,  pop:null,      lead:"水电 48.2%" },
+    lc:48.71, elec:0.023, fuel:1.520, access:76.8,  pop:"5520万",   lead:"水电 48.2%" },
   { name:"阿联酋", en:"UAE",         file:"uae.html",
-    lc:28.47, elec:0.080, fuel:0.702, access:null,  pop:"1135万",  lead:"核电 23.1%" },
+    lc:28.47, elec:0.080, fuel:0.702, access:100.0, pop:"1135万",  lead:"核电 23.1%" },
   { name:"菲律宾", en:"Philippines", file:"philippines.html",
     lc:19.61, elec:0.200, fuel:1.200, access:98.0,  pop:"1.13亿",  lead:"地热 8.5%" },
   { name:"南非",   en:"South Africa",file:"south-africa.html",
@@ -239,7 +235,7 @@ document.getElementById("tbody").innerHTML = M.map(m => `
     <td>${m.fuel.toFixed(3)}</td>
     ${m.access === null ? '<td class="na">待核实</td>' : `<td>${m.access.toFixed(1)}%</td>`}
     ${m.pop === null ? '<td class="na">待核实</td>' : `<td>${m.pop}</td>`}
-    <td style="text-align:left;color:var(--ink-2)">${m.lead}</td>
+    <td>${m.lead}</td>
   </tr>`).join("");
 
 const hi = M[0], lo = M[M.length - 1];
