@@ -339,13 +339,12 @@ FX.eurZar = FX.usdZar * FX.eurUsd;
 
 const PRICES = [
   { group: "燃油（每升）", en: "Fuels, per litre" },
-  { name: "汽油 95 ULP",            en: "Petrol 95",        asOf: "2026-08-05", zar: 25.58 },
-  { name: "汽油 93 ULP",            en: "Petrol 93",        asOf: "2026-08-05", zar: 25.42 },
-  { name: "柴油 0.005% 硫（批发）", en: "Diesel 50ppm",     asOf: "2026-08-05", zar: 26.40 },
-  { name: "柴油 0.05% 硫（批发）",  en: "Diesel 500ppm",    asOf: "2026-08-05", zar: 26.16 },
+  { name: "汽油",            en: "Petrol",        asOf: "2026-08-24", zar: 25.15 },
+  { name: "柴油",     en: "Diesel",     asOf: "2026-08-24", zar: 28.89 },
+  { name: "煤油",  en: "Kerosene",    asOf: "2026-08-24", zar: 21.38 },
   { group: "电价（每 kWh）", en: "Electricity, per kWh" },
-  { name: "居民用电",  en: "Households", asOf: "2025-06", zar: 3.710, stale: true },
-  { name: "工商业用电", en: "Business",   asOf: "2025-06", zar: 2.289, stale: true }
+  { name: "居民用电",  en: "Households", asOf: "2025-12-01", zar: 4.524 },
+  { name: "工商业用电", en: "Business",   asOf: "2025-12-01", zar: 2.289 }
 ];
 
 /* 2025 全年发电结构，合计 99.9%（四舍五入）。低碳项着色，化石项灰阶。 */
@@ -387,10 +386,7 @@ document.getElementById("priceBody").innerHTML = PRICES.map(r => {
 }).join("");
 
 document.getElementById("priceNote").innerHTML =
-  `美元列 = ZAR ÷ ${fmt(FX.usdZar,2)}，随上方汇率联动。`
-  + `燃油为 DMPR 公布的管制价，柴油为批发价，零售端加价不受管制；来源未标注内陆/沿海，跨区比价前需确认。`
-  + `电价取 GlobalPetrolPrices 公开数据（原始来源 Eskom / NERSA），含电量、输配电及各项税费。`
-  + `<strong style="color:var(--amber)">该公开版采集于 2025 年 6 月，尚未包含 Eskom 直供 2026-04-01 上调 8.76%、市政批发 2026-07-01 上调 9.01%；更新至 2025-12 的数据需付费下载。</strong>`;
+  `美元列 = 按照Global Petrol Prices时点价格。公开版采集于2026年8月24日（燃油价格）、2025年12月1日（电力价格）。燃油为 DMPR 公布的管制价，柴油为批发价，零售端加价不受管制；电价取 GlobalPetrolPrices 公开数据（原始来源 Eskom / NERSA），含电量、输配电及各项税费。`
 
 /* ---- mix chart ---- */
 const lowCarbon = MIX.filter(d => d.low).reduce((s, d) => s + d.value, 0);
