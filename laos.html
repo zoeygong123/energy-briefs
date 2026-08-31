@@ -142,6 +142,16 @@ dd .org{font-weight:600;color:var(--ink)}
 .sources a:hover,.sources a:focus-visible{color:var(--primary);border-bottom-color:var(--primary)}
 :focus-visible{outline:2px solid var(--primary);outline-offset:2px}
 
+/* ---- navigation ---- */
+.nav{background:var(--surface);border-bottom:1px solid var(--line);padding:12px 0;margin-bottom:12px}
+.nav-content{max-width:1180px;margin:0 auto;padding:0 20px;display:flex;gap:16px;align-items:center}
+.nav a{text-decoration:none;color:var(--ink-2);font-size:13px;font-weight:500;padding:8px 12px;
+  border-radius:4px;transition:background-color .16s ease, color .16s ease}
+.nav a:hover,.nav a:focus-visible{background:var(--line);color:var(--primary)}
+.nav a:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.nav a.active{color:var(--primary);font-weight:600}
+.nav-sep{width:1px;height:18px;background:var(--line-2)}
+
 @media print{
   body{background:#fff;padding:0;font-size:11px}
   .card,.sources{box-shadow:none;break-inside:avoid}
@@ -151,6 +161,13 @@ dd .org{font-weight:600;color:var(--ink)}
 </style>
 </head>
 <body>
+<div class="nav">
+  <div class="nav-content">
+    <a href="index.html">首页 / Dashboard</a>
+    <div class="nav-sep"></div>
+    <a class="active">老挝 Laos</a>
+  </div>
+</div>
 <div class="wrap">
 
   <header>
@@ -181,8 +198,8 @@ dd .org{font-weight:600;color:var(--ink)}
       <div class="k-foot"><span class="vintage"><b>2024</b> · 世界银行/CIA 口径</span></div>
     </div><div class="card kpi">
       <div class="k-label">GDP 增速 <span class="k-en">GDP Growth</span></div>
-      <div class="k-value num">—<u></u></div>
-      <div class="k-foot"><span class="vintage warn"><b>待核实</b> · ADB 统计表</span></div>
+      <div class="k-value num">5<u>%</u></div>
+      <div class="k-foot"><span class="vintage"><b>2026</b> · 公开信息</span></div>
     </div><div class="card kpi">
       <div class="k-label">电力接入率 <span class="k-en">Access to Electricity</span></div>
       <div class="k-value num">96.5<u>%</u></div>
@@ -224,14 +241,14 @@ dd .org{font-weight:600;color:var(--ink)}
     <div class="card">
       <h2>市场体制与监管 <span>Market Structure &amp; Regulation</span></h2>
       <dl>
-        <div class="row"><dt>主管与运营机构<span>Key Entities</span></dt><dd><span class="org">能源矿产部（MEM）</span>：电力规划、项目审批与跨境购售电协议。<br><span class="org">EDL</span>：老挝国家电力公司，国内输配电与售电主体。<br><span class="org">工贸部</span>：成品油零售价的定期调整发布方。</dd></div><div class="row"><dt>市场定位<span>Market Position</span></dt><dd><span class="lead">以水电出口为核心的“东南亚蓄电池”模式</span>电力是老挝主要出口商品之一，主要销往泰国与越南；国内消费规模相对装机而言很小。<ul><li><strong>2024 年清洁能源投资：</strong>约 <span class="figure">5.50 亿美元</span>，较 2023 年的 1,014 万美元大幅跃升。</li><li><strong>政策工具：</strong>Climatescope 追踪的 8 类政策中具备 4 类（可再生目标、税收优惠、绿证、优先调度），竞价招标与上网电价机制缺位。</li></ul></dd></div><div class="row"><dt>电价水平<span>Tariff Level</span></dt><dd>居民电价约为世界均值的 <span class="figure">17.3%</span>、亚洲均值的 34%，属全球最低区间之一。低电价叠加充裕水电，意味着<strong>境内工商业自发自用几乎没有经济性</strong>，市场机会集中在发电侧与跨境送出，而非用户侧。<div style="margin-top:7px"><span class="vintage"><b>2025-09</b> · GlobalPetrolPrices</span></div></dd></div>
+        <div class="row"><dt>主管与运营机构<span>Key Entities</span></dt><dd><span class="org">能源矿产部（MEM）</span>：电力规划、项目审批与跨境购售电协议。<br><span class="org">EDL</span>：老挝国家电力公司，国内输配电与售电主体。<br><span class="org">工贸部</span>：成品油零售价的定期调整发布方。</dd></div><div class="row"><dt>市场定位<span>Market Position</span></dt><dd><span class="lead">以水电出口为核心的“东南亚蓄电池”模式</span>电力是老挝主要出口商品之一，主要销往泰国与越南；国内消费规模相对装机而言很小。<ul><li><strong>2024 年清洁能源投资：</strong>约 <span class="figure">5.50 亿美元</span>，较 2023 年的 1,014 万美元大幅跃升。</li><li><strong>政策工具：</strong>Climatescope 追踪的 8 类政策中具备 4 类（可再生目标、税收优惠、绿证、优先调度），竞价招标与上网电价机制缺位。</li></ul></dd></div><div class="row"><dt>电价水平<span>Tariff Level</span></dt><dd>居民电价约为世界均值的 <span class="figure">24.07%</span>、亚洲均值的 48.62%，属全球最低区间之一。低电价叠加充裕水电，意味着<strong>境内工商业自发自用几乎没有经济性</strong>，市场机会集中在发电侧与跨境送出，而非用户侧。<div style="margin-top:7px"><span class="vintage"><b>2025-12</b> · GlobalPetrolPrices</span></div></dd></div>
       </dl>
     </div>
 
     <div class="card risk">
       <h2>宏观与电网风险 <span>Macro &amp; Grid Risk</span></h2>
       <dl>
-        <div class="row r-red"><dt>来水与季节性<span>Hydrology</span></dt><dd>七成以上电力来自水电，2024 年发电量较上年下滑约 18%。枯水年同时压缩出口收入与国内供应，且与旱季用电高峰重叠，是最核心的运营风险。</dd></div><div class="row r-amb"><dt>宏观与偿付能力<span>Macro & Debt</span></dt><dd>基普对美元长期承压、通胀高企，外债与外汇储备结构是跨境电力贸易回款的关键约束。以美元或泰铢计价的 PPA 条款与汇兑安排应视为项目风险的第一层，而非商务细节。</dd></div><div class="row r-blu"><dt>数据口径冲突<span>Source Conflict</span></dt><dd>本页已发现燃油价格在 GPP 与官方来源之间存在近一倍的差异，工商业电价缺失。老挝的公开数据完备度介于泰菲与缅甸之间，关键数字建议逐项回到 EDL 与工贸部原始发布核对。</dd></div>
+        <div class="row r-red"><dt>来水与季节性<span>Hydrology</span></dt><dd>七成以上电力来自水电，2024 年发电量较上年下滑约 18%。枯水年同时压缩出口收入与国内供应，且与旱季用电高峰重叠，是最核心的运营风险。</dd></div><div class="row r-amb"><dt>宏观与偿付能力<span>Macro & Debt</span></dt><dd>基普对美元长期承压、通胀高企，外债与外汇储备结构是跨境电力贸易回款的关键约束。以美元或泰铢计价的 PPA 条款与汇兑安排应视为项目风险的首要考虑要素。</dd></div><div class="row r-blu"><dt>电力需求分析<span>Electricity Demand</span></dt><dd>老挝近10年用电量增速<strong>13%-14%</strong>以上，高于GDP增速；核心驱动力为矿采/工业扩张、电气化率增加、区域出口</dd></div>
       </dl>
     </div>
   </div>
@@ -250,7 +267,7 @@ dd .org{font-weight:600;color:var(--ink)}
    单一数据源。改数只改这里，页面所有换算与图表自动跟随。
    USD/CNY 6.72、EUR/USD 1.1545 取自 2026-08-25 市场中间价。
    ============================================================ */
-const D = {"cur": "LAK", "curName": "基普", "usdLocal": 22509, "cnyLocal": 3349.5535714285716, "eurLocal": 25986.6405, "fxAsOf": "2026-07-06", "fxNote": "GlobalPetrolPrices 燃油采集时汇率", "kpis": [{"label": "总人口", "en": "Population", "value": "777", "unit": "万", "chip": "2024 · 世界银行/CIA 口径"}, {"label": "GDP 增速", "en": "GDP Growth", "value": "—", "unit": "", "chip": "待核实 · ADB 统计表", "warn": true}, {"label": "电力接入率", "en": "Access to Electricity", "value": "96.5", "unit": "%", "chip": "2023 · World Bank"}, {"label": "低碳电力占比", "en": "Low-Carbon Share", "value": "72.9", "unit": "%", "chip": "2022 · EIA"}], "prices": [{"group": "燃油（每升）", "en": "Fuels, per litre"}, {"name": "汽油 Octane-95", "en": "Gasoline", "asOf": "2026-07-06", "v": 38940}, {"name": "柴油", "en": "Diesel", "asOf": "2026-07-20", "v": 47600, "stale": true}, {"group": "电价（每 kWh）", "en": "Electricity, per kWh"}, {"name": "居民用电", "en": "Households", "asOf": "2025-09", "v": 993.73, "stale": true}, {"name": "工商业用电", "en": "Business", "asOf": "2025-09", "v": null, "pending": "GPP 未公布，待核实"}], "priceNote": "<strong style=\"color:var(--amber)\">燃油价格存在重大来源冲突：老挝国家燃料公司公布的万象 2026-07-09 零售价为95 号汽油 34,720 基普、柴油 25,400 基普；工贸部 2026-06-25 调价表为柴油 24,560、普通汽油 30,690 基普。GPP 的柴油报价（47,600）接近官方价的两倍，本表为保持五国同源可比而保留 GPP 数值，但任何成本测算都应改用官方价并核实口径差异。</strong>电价来源为老挝国家电力公司（EDL）与能源矿产部；工商业电价 GPP 未公布。", "mix": [["水电", "Hydro", 72.81, "#2563eb"], ["化石能源", "Fossil", 27.05, "#3f3f46"], ["太阳能", "Solar", 0.13, "#d97706"]], "mixAsOf": "2022 · EIA / GlobalPetrolPrices", "mixNote": "水电占比 72.8%，为本组五国最高，低碳电力占比 72.9% 同样居首。2024 年水电装机 9.68 GW、发电 15.39 TWh，较 2023 年的 18.75 TWh 明显回落——<strong>来水波动是老挝电力供应的首要变量，不是次要因素。</strong>"};
+const D = {"cur": "LAK", "curName": "基普", "usdLocal": 22509, "cnyLocal": 3349.5535714285716, "eurLocal": 25986.6405, "fxAsOf": "2026-08-24", "fxNote": "GlobalPetrolPrices 燃油采集时汇率", "kpis": [{"label": "总人口", "en": "Population", "value": "777", "unit": "万", "chip": "2024 · 世界银行/CIA 口径"}, {"label": "GDP 增速", "en": "GDP Growth", "value": "—", "unit": "", "chip": "待核实 · ADB 统计表", "warn": true}, {"label": "电力接入率", "en": "Access to Electricity", "value": "96.5", "unit": "%", "chip": "2023 · World Bank"}, {"label": "低碳电力占比", "en": "Low-Carbon Share", "value": "72.9", "unit": "%", "chip": "2024 · EIA"}], "prices": [{"group": "燃油（每升）", "en": "Fuels, per litre"}, {"name": "汽油", "en": "Gasoline", "asOf": "2026-08-24", "v": 37430}, {"name": "柴油", "en": "Diesel", "asOf": "2026-08-24", "v": 31290}, {"group": "电价（每 kWh）", "en": "Electricity, per kWh"}, {"name": "居民用电", "en": "Households", "asOf": "2025-12", "v": 903.01}, {"name": "工商业用电", "en": "Business", "asOf": "2025-09", "v": null, "pending": "GPP 未公布，待核实"}], "priceNote": "<strong style=\"color:var(--amber)\">燃油价格中汽油价格浮动较小、柴油26年7月为47600 LAK/Liter，8月价格同比下调34.3%，但仍为世界平均水平的134.26%。</strong>电价来源为老挝国家电力公司（EDL）与能源矿产部、Global Petrol Prices统计；工商业电价 GPP 未公布。", "mix": [["水电", "Hydro", 72.81, "#2563eb"], ["化石能源", "Fossil", 27.05, "#3f3f46"], ["太阳能", "Solar", 0.13, "#d97706"]], "mixAsOf": "2024 · EIA / GlobalPetrolPrices", "mixNote": "水电占比 72.8%，为本组五国最高，低碳电力占比 72.9% 同样居首。2024 年水电装机 9.68 GW、发电 15.39 TWh，较 2023 年的 18.75 TWh 明显回落——<strong>来水波动、雨季&非雨季的结构性错配是老挝电力供应的首要变量。</strong>"};
 
 const fmt = (n, d) => n.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
 const dp  = v => v >= 1000 ? 0 : v >= 10 ? 2 : 3;

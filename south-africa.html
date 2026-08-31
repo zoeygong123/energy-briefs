@@ -142,6 +142,16 @@ dd .org{font-weight:600;color:var(--ink)}
 .sources a:hover,.sources a:focus-visible{color:var(--primary);border-bottom-color:var(--primary)}
 :focus-visible{outline:2px solid var(--primary);outline-offset:2px}
 
+/* ---- navigation ---- */
+.nav{background:var(--surface);border-bottom:1px solid var(--line);padding:12px 0;margin-bottom:12px}
+.nav-content{max-width:1180px;margin:0 auto;padding:0 20px;display:flex;gap:16px;align-items:center}
+.nav a{text-decoration:none;color:var(--ink-2);font-size:13px;font-weight:500;padding:8px 12px;
+  border-radius:4px;transition:background-color .16s ease, color .16s ease}
+.nav a:hover,.nav a:focus-visible{background:var(--line);color:var(--primary)}
+.nav a:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.nav a.active{color:var(--primary);font-weight:600}
+.nav-sep{width:1px;height:18px;background:var(--line-2)}
+
 @media print{
   body{background:#fff;padding:0;font-size:11px}
   .card,.sources{box-shadow:none;break-inside:avoid}
@@ -151,6 +161,13 @@ dd .org{font-weight:600;color:var(--ink)}
 </style>
 </head>
 <body>
+<div class="nav">
+  <div class="nav-content">
+    <a href="index.html">首页 / Dashboard</a>
+    <div class="nav-sep"></div>
+    <a class="active">南非 South Africa</a>
+  </div>
+</div>
 <div class="wrap">
 
   <header>
